@@ -8,7 +8,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".index">
+    tools:context=".activity.home">
 
 
     <androidx.cardview.widget.CardView
@@ -28,7 +28,7 @@
             android:layout_height="200dp"
             android:layout_gravity="left|center"
             android:layout_margin="10dp"
-            android:src="@drawable/RoomA" />
+            android:src="@drawable/rooma" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
             android:layout_height="200dp"
             android:layout_gravity="left"
             android:layout_margin="10dp"
-            android:src="@drawable/RoomB"
+            android:src="@drawable/roomb"
             />
 
         <TextView
@@ -98,7 +98,7 @@
             android:layout_height="200dp"
             android:layout_gravity="left"
             android:layout_margin="10dp"
-            android:src="@drawable/RoomC"/>
+            android:src="@drawable/roomc"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
             android:layout_height="200dp"
             android:layout_gravity="left"
             android:layout_margin="10dp"
-            android:src="@drawable/RoomD"/>
+            android:src="@drawable/roomd"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -165,7 +165,7 @@
             android:layout_height="200dp"
             android:layout_gravity="left"
             android:layout_margin="10dp"
-            android:src="@drawable/RoomE"
+            android:src="@drawable/roome"
             />
 
         <TextView
@@ -200,7 +200,7 @@
             android:layout_height="200dp"
             android:layout_gravity="left"
             android:layout_margin="10dp"
-            android:src="@drawable/RoomF"
+            android:src="@drawable/roomf"
             />
 
         <TextView
@@ -235,7 +235,7 @@
             android:layout_height="200dp"
             android:layout_gravity="left"
             android:layout_margin="10dp"
-            android:src="@drawable/RoomG"
+            android:src="@drawable/roomg"
             />
 
         <TextView
@@ -270,7 +270,7 @@
             android:layout_height="200dp"
             android:layout_gravity="left"
             android:layout_margin="10dp"
-            android:src="@drawable/RoomH"
+            android:src="@drawable/roomh"
             />
 
         <TextView
