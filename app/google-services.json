@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "11327473609",
+    "firebase_url": "https://studio-fe83d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "studio-fe83d",
+    "storage_bucket": "studio-fe83d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11327473609:android:71b0ba2add82649f0aca18",
+        "android_client_info": {
+          "package_name": "com.example.studio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11327473609-lbm49004e87hi5rj28nndunhb4a2sv09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD39nVOV5k__8ux5LqZEDno-9d0Fu5uVDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11327473609-lbm49004e87hi5rj28nndunhb4a2sv09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
