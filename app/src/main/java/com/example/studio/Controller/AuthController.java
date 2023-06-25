@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class AuthController {
+public class AuthController extends BaseController{
 
     private AuthModel model;
     private Activity activity;

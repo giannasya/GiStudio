@@ -47,14 +47,14 @@ public class login extends AppCompatActivity implements AuthController.AuthCallb
 
     @Override
     public void onLoginSuccess() {
-        Toast.makeText(login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+        Toast.makeText(login.this, R.string.LOGIN_SUCCESS, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(login.this, home.class);
         startActivity(intent);
     }
 
     @Override
     public void onLoginFailure() {
-        Toast.makeText(login.this,"Login Failed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(login.this,R.string.LOGIN_FAILED, Toast.LENGTH_SHORT).show();
     }
 }
 
