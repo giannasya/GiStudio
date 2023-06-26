@@ -1,4 +1,4 @@
-package com.example.studio.activity;
+package com.example.studio.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +14,7 @@ import com.example.studio.Controller.AuthController;
 import com.example.studio.Model.AuthModel;
 import com.example.studio.R;
 
-public class login extends AppCompatActivity implements AuthController.AuthCallback{
+public class Login extends AppCompatActivity implements AuthController.AuthCallback{
     private AuthController controller;
     private AuthModel model;
     private Button loginBtn;
@@ -47,14 +47,14 @@ public class login extends AppCompatActivity implements AuthController.AuthCallb
 
     @Override
     public void onLoginSuccess() {
-        Toast.makeText(login.this, R.string.LOGIN_SUCCESS, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(login.this, home.class);
+        Toast.makeText(Login.this, R.string.LOGIN_SUCCESS, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Login.this, Home.class);
         startActivity(intent);
     }
 
     @Override
     public void onLoginFailure() {
-        Toast.makeText(login.this,R.string.LOGIN_FAILED, Toast.LENGTH_SHORT).show();
+        Toast.makeText(Login.this,R.string.LOGIN_FAILED, Toast.LENGTH_SHORT).show();
     }
 }
 

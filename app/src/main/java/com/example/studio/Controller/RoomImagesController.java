@@ -5,8 +5,11 @@ import android.widget.ImageView;
 import com.example.studio.R;
 
 public class RoomImagesController {
-    private int[] imageArray = {R.drawable.rooma, R.drawable.roomb, R.drawable.roomc, R.drawable.roomd,
-            R.drawable.roome, R.drawable.roomf, R.drawable.roomg, R.drawable.roomh};
+    private int[] imageArray = {R.drawable.rooma, R.drawable.roomb,
+            R.drawable.roomc, R.drawable.roomd,
+            R.drawable.roome, R.drawable.roomf,
+            R.drawable.roomg, R.drawable.roomh};
+
     private int currentIndex;
 
     public RoomImagesController() {

@@ -1,4 +1,4 @@
-package com.example.studio.activity;
+package com.example.studio.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView;
 
 import com.example.studio.R;
 
-public class home extends AppCompatActivity {
+public class Home extends AppCompatActivity {
 
     private CardView card1, card2, card3, card4, card5, card6, card7, card8;
 
@@ -93,7 +93,7 @@ public class home extends AppCompatActivity {
     }
 
     private void navigateToRoomX(int x) {
-        Intent intent = new Intent(home.this, ruang.class);
+        Intent intent = new Intent(Home.this, Ruang.class);
         intent.putExtra("roomIndex", x);
         startActivity(intent);
     }

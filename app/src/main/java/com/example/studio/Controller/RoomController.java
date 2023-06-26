@@ -15,11 +15,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 public class RoomController extends BaseController{
+    private GuitarController guitarController;
+    private BassController bassController;
+    private DrumController drumController;
     private RoomModel model;
     private Activity activity;
     private DatabaseReference dbRef;
-    private String DB_REF = "room";
-    private String[] roomArray =  { "roomA", "roomB", "roomC","roomD", "roomE", "roomF", "roomG", "roomH"};
+    private String DB_REF = "ruang";
+    private String[] roomArray =  { "ruangA", "ruangB", "ruangC","ruangD",
+                        "ruangE", "ruangF", "ruangG", "ruangH"};
 
     public RoomController(){
         dbRef = config.connection(DB_REF);
@@ -42,11 +46,11 @@ public class RoomController extends BaseController{
             String roomName = roomArray[index];
             textView.setText(roomName);
             roomModel.setRoom(roomName);
-            Log.d("room nama", roomModel.getRoom());
         }
     }
 
-    public int nextRoom(TextView textView, int index, RoomModel roomModel){
+    public int nextRoom(TextView textView, int index, RoomModel roomModel,
+                        TextView guitarText, TextView bassText, TextView drumText){
         Log.d("index pas masuk", String.valueOf(index));
         index++;
         if(index >= roomArray.length){
@@ -54,36 +58,37 @@ public class RoomController extends BaseController{
         }
         String roomName = roomArray[index];
         textView.setText(roomName);
-        Log.d("Room name --", roomName);
-        Log.d("nilai index sekarang ++", String.valueOf(index));
         roomModel.setRoom(roomName);
+        readRoomDetail(roomModel, guitarText, bassText, drumText);
         return index;
     }
 
-    public int previousRoom(TextView textView, int index, RoomModel roomModel){
+    public int previousRoom(TextView textView, int index, RoomModel roomModel,
+                            TextView guitarText, TextView bassText, TextView drumText){
         Log.d("index pas masuk", String.valueOf(index));
         index--;
         if(index < 0){
             index = roomArray.length -1;
         }
         String roomName = roomArray[index];
-        Log.d("Room name --", roomName);
-        Log.d("nilai index sekarang --", String.valueOf(index));
         textView.setText(roomName);
         roomModel.setRoom(roomName);
+        readRoomDetail(roomModel, guitarText, bassText, drumText);
         return index;
     }
 
-    public void readRoomDetail(RoomModel roomModel){
+    public void readRoomDetail(RoomModel roomModel, TextView guitarText,
+                               TextView bassText, TextView drumText){
         config.connection(DB_REF).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot roomSnapshot : dataSnapshot.getChildren()){
-                    if(roomSnapshot.getValue(String.class).equals(roomModel.getRoom())){
-                        roomModel.setBassId(roomSnapshot.child("bassId").getValue(String.class));
-                        roomModel.setDrumId(roomSnapshot.child("drumId").getValue(String.class));
-                        roomModel.setGuitarId(roomSnapshot.child("guitarId").getValue(String.class));
-                        roomModel.setPrice(roomSnapshot.child("price").getValue(String.class));
+                    String roomName = roomSnapshot.child("room").getValue(String.class);
+                    if(roomName.equalsIgnoreCase(roomModel.getRoom().trim())){
+                        setRoomModel(roomSnapshot, roomModel);
+                        getGuitarDetails(roomModel, guitarText);
+                        getBassDetails(roomModel, bassText);
+                        getDrumDetails(roomModel, drumText);
                     }
                 }
             }
@@ -93,5 +98,29 @@ public class RoomController extends BaseController{
                 System.out.println(R.string.DATA_NOT_FOUND);
             }
         });
+    }
+
+    private void setRoomModel(DataSnapshot data, RoomModel roomModel){
+        roomModel.setBassId(data.child("bassId").getValue().toString());
+        roomModel.setGuitarId(data.child("guitarId").getValue().toString());
+        roomModel.setDrumId(data.child("bassId").getValue().toString());
+        roomModel.setPrice(data.child("price").getValue().toString());
+        Log.d("model dalem loop", roomModel.getRoom() + roomModel.getBassId() +
+                roomModel.getGuitarId() + roomModel.getDrumId() + roomModel.getPrice());
+    }
+
+    private void getGuitarDetails(RoomModel roomModel, TextView guitarText){
+        guitarController = new GuitarController();
+        guitarController.getGuitarData(roomModel.getGuitarId(), guitarText);
+    }
+
+    private void getBassDetails(RoomModel roomModel, TextView bassText){
+        bassController = new BassController();
+        bassController.getBassData(roomModel.getBassId(), bassText);
+    }
+
+    private void getDrumDetails(RoomModel roomModel, TextView drumText){
+        drumController = new DrumController();
+        drumController.getDrumData(roomModel.getDrumId(), drumText);
     }
 }

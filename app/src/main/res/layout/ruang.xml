@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ruang">
+    tools:context=".Activity.Ruang">
     <ScrollView
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
@@ -52,6 +52,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Fender Mustang Guitar"
+                            android:id="@+id/guitarText"
+                            android:textColor="#555" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Fodera Yinyang"
+                            android:id="@+id/bassText"
+                            android:textColor="#555" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Tama Red"
+                            android:id="@+id/drumText"
                             android:textColor="#555" />
                     </LinearLayout>
 
