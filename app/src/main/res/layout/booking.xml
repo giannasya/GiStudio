@@ -43,12 +43,10 @@
                         android:textColor="#000"
                         android:textSize="18sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tanggal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="tanggal"
-                        android:hint="pilih tanggalnya"/>
+<!--                    <Spinner -->
+<!--                        android:id="@+id/tanggal"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_width="wrap_content"/>-->
 
                     <TextView
                         android:layout_width="match_parent"
@@ -58,12 +56,10 @@
                         android:textColor="#000"
                         android:textSize="18sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/buattanggal"
-                        android:layout_width="match_parent"
+                    <Spinner
+                        android:id="@+id/roomSelector"
                         android:layout_height="wrap_content"
-                        android:text="tanggal"
-                        android:hint="pilih tanggalnya"/>
+                        android:layout_width="wrap_content"/>
                 </LinearLayout>
 
                 <RelativeLayout

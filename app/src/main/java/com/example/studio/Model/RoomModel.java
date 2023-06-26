@@ -19,6 +19,9 @@ public class RoomModel extends BaseModel{
         this.price = price;
     };
 
+    public String toString(){
+        return room;
+    }
     public String getRoom(){
         return room;
     }

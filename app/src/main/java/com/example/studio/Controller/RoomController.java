@@ -1,11 +1,15 @@
 package com.example.studio.Controller;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.studio.Adapter.SpinnerAdapter;
 import com.example.studio.Config.config;
 import com.example.studio.Model.RoomModel;
 import com.example.studio.R;
@@ -14,7 +18,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class RoomController extends BaseController{
+    private ArrayList<RoomModel> roomList;
     private GuitarController guitarController;
     private BassController bassController;
     private DrumController drumController;
@@ -36,9 +43,25 @@ public class RoomController extends BaseController{
         dbRef = config.connection(DB_REF);
         this.model = roomModel;
     }
-    public RoomController(String[] roomArray){
-        dbRef = config.connection(DB_REF);
-        this.roomArray = roomArray;
+
+    public void setSpinnerAdapter(ArrayList<RoomModel> roomList, ArrayAdapter<RoomModel> spinnerAdapter) {
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                roomList.clear();
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    RoomModel model = new RoomModel();
+                    model.setRoom(data.child("room").getValue().toString());
+                    roomList.add(model);
+                }
+                spinnerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println(R.string.DATA_NOT_FOUND);
+            }
+        });
     }
 
     public void setRoomText(TextView textView, int index, RoomModel roomModel){
@@ -65,7 +88,6 @@ public class RoomController extends BaseController{
 
     public int previousRoom(TextView textView, int index, RoomModel roomModel,
                             TextView guitarText, TextView bassText, TextView drumText){
-        Log.d("index pas masuk", String.valueOf(index));
         index--;
         if(index < 0){
             index = roomArray.length -1;
@@ -105,8 +127,6 @@ public class RoomController extends BaseController{
         roomModel.setGuitarId(data.child("guitarId").getValue().toString());
         roomModel.setDrumId(data.child("bassId").getValue().toString());
         roomModel.setPrice(data.child("price").getValue().toString());
-        Log.d("model dalem loop", roomModel.getRoom() + roomModel.getBassId() +
-                roomModel.getGuitarId() + roomModel.getDrumId() + roomModel.getPrice());
     }
 
     private void getGuitarDetails(RoomModel roomModel, TextView guitarText){
