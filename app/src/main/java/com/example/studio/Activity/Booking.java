@@ -4,21 +4,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.studio.Controller.BookingController;
 import com.example.studio.Controller.RoomController;
+import com.example.studio.Model.BookingModel;
 import com.example.studio.Model.RoomModel;
 import com.example.studio.R;
 
 import java.util.ArrayList;
 
 public class Booking extends AppCompatActivity {
+    private BookingController bookingController;
     private RoomController roomController;
     private ArrayAdapter<RoomModel> spinnerAdapter;
+    private BookingModel bookingModel;
     private Spinner spinner;
     private Context context;
+    private TextView datePicker;
     private ArrayList<RoomModel> roomList;
 
     @Override
@@ -26,6 +33,8 @@ public class Booking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.booking);
         roomController = new RoomController();
+        bookingController = new BookingController();
+        bookingModel = new BookingModel();
 
         roomList = new ArrayList<>();
         spinner = findViewById(R.id.roomSelector);
@@ -44,6 +53,14 @@ public class Booking extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 System.out.println(R.string.DATA_NOT_FOUND);
+            }
+        });
+
+        datePicker = findViewById(R.id.datePicker);
+        datePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bookingController.setDate(context, datePicker, bookingModel, spinnerAdapter, roomList);
             }
         });
     }

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.example.studio.Adapter.SpinnerAdapter;
 import com.example.studio.Config.config;
+import com.example.studio.Model.BookingModel;
 import com.example.studio.Model.RoomModel;
 import com.example.studio.R;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RoomController extends BaseController{
     private ArrayList<RoomModel> roomList;
@@ -29,7 +31,8 @@ public class RoomController extends BaseController{
     private Activity activity;
     private DatabaseReference dbRef;
     private String DB_REF = "ruang";
-    private String[] roomArray =  { "ruangA", "ruangB", "ruangC","ruangD",
+    private int roomSize;
+    public String[] roomArray =  { "ruangA", "ruangB", "ruangC","ruangD",
                         "ruangE", "ruangF", "ruangG", "ruangH"};
 
     public RoomController(){
@@ -62,6 +65,29 @@ public class RoomController extends BaseController{
                 System.out.println(R.string.DATA_NOT_FOUND);
             }
         });
+    }
+
+    public void updateSelectedRoom(ArrayAdapter<RoomModel> spinnerAdapter, List<BookingModel> bookingModel) {
+
+        for(int i=0; i<roomArray.length; i++){
+            RoomModel room = spinnerAdapter.getItem(i);
+            room.setRoom(roomArray[i]);
+            for(BookingModel bookingModel1: bookingModel){
+
+                Log.d("data sebelum if", room.getRoom());
+                Log.d("panjang data", String.valueOf(room.getRoom().trim().length()));
+                Log.d("booking model sebelum if", bookingModel1.getBookedRoom());
+                Log.d("panjang booking model", String.valueOf(room.getRoom().trim().length()));
+                if(bookingModel1.getBookedRoom().contains(roomArray[i])){
+                    if(!room.getRoom().contains("Booked")){
+                        room.setRoom(bookingModel1.getBookedRoom());
+                        break;
+                    }
+                }
+                Log.d("data selesai if", room.getRoom());
+            }
+        }
+        spinnerAdapter.notifyDataSetChanged();
     }
 
     public void setRoomText(TextView textView, int index, RoomModel roomModel){
