@@ -6,33 +6,45 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:gravity="center_vertical|center_horizontal"
-    tools:context=".Activity.Login">
+    tools:context=".Register">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:textStyle="bold"
-        android:text="Login critanya"
+        android:text="Register"
         android:textSize="30dp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/filledTextField"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="15dp"
-        android:hint="Username">
+        android:hint="Email">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#fff"
-            android:id="@+id/usernametxt"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/filledTextField2"
+        android:layout_width="300dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:hint="Username"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="300dp"
         android:gravity="center"
         android:layout_height="wrap_content"
@@ -45,19 +57,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#fff"
-            android:inputType="textPassword"
-            android:id="@+id/passwordtxt"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="300dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:hint="Re-Password"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
     <Button
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:id="@+id/loginbtn"
         android:layout_marginTop="10dp"
-        android:text="login"
+        android:text="Sign In"
         android:textColor="#fff"
         android:onClick="loginHome"
         android:backgroundTint="#032647"/>
 </LinearLayout>
-
 
 
