@@ -1,7 +1,10 @@
 package com.example.studio.Controller;
 
+import static java.lang.System.in;
+
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -12,7 +15,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.studio.Activity.Booking;
+import com.example.studio.Activity.Home;
 import com.example.studio.Config.config;
+import com.example.studio.Model.BookedModel;
 import com.example.studio.Model.BookingModel;
 import com.example.studio.Model.RoomModel;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +36,6 @@ public class BookingController {
     private String DB_REF = "booking";
     private int day, year, month;
     private String date;
-    private String[] arrayRoom;
 
     public BookingController(){
         dbRef = config.connection(DB_REF);
@@ -57,16 +61,13 @@ public class BookingController {
                 dbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        List<BookingModel> bookingList = new ArrayList<>();
+                        List<BookedModel> bookingList = new ArrayList<>();
                         for(DataSnapshot data : snapshot.getChildren()){
                             if(data.child("tanggal").getValue(String.class).trim().equals(date.trim())){
-                                BookingModel result = data.getValue(BookingModel.class);
+                                BookedModel result = data.getValue(BookedModel.class);
                                 result.setBookedRoom(result.getRoom() + " - Booked");
                                 bookingList.add(result);
                             }
-                        }
-                        for(BookingModel model : bookingList){
-                                Log.d("Booking Controller", model.getBookedRoom());
                         }
                         roomController = new RoomController();
                         roomController.updateSelectedRoom(spinnerAdapter, bookingList);
@@ -82,34 +83,28 @@ public class BookingController {
         datePickerDialog.show();
     }
 
-    public void resetRoom(BookingModel bookingModel, ArrayAdapter<RoomModel> spinnerAdapter, ArrayList<RoomModel> roomList) {
-        roomController = new RoomController();
-        String[] arrayRoom = roomController.roomArray; // Assuming there's a method to retrieve the room array
-        for (int i = 0; i < arrayRoom.length; i++) {
-            RoomModel room = roomList.get(i);
-            String bookedRoom = bookingModel.getBookedRoom();
-            if (bookedRoom != null && bookedRoom.trim().contains(arrayRoom[i])) {
-                bookingModel.setBookedRoom(arrayRoom[i]);
-                room.setRoom(bookingModel.getBookedRoom()); // Assuming there's a method to set the booked room
-            } else {
-                room.setRoom(arrayRoom[i]);
-            }
-        }
-        spinnerAdapter.notifyDataSetChanged();
+    public void backHome(Context context, String username){
+        Intent intent = new Intent(context, Home.class);
+        intent.putExtra("username", username);
+        context.startActivity(intent);
     }
 
-
-    public void setBookedRoom(BookingModel bookingModel, ArrayAdapter<RoomModel> spinnerAdapter,
-                              ArrayList<RoomModel> roomList) {
-        for (int i = 0; i < roomList.size(); i++) {
-            RoomModel room = roomList.get(i);
-            Log.d("roomList berubah", String.valueOf(roomList.get(i)));
-            if (bookingModel.getBookedRoom().trim().equals(room.toString())) {
-                Log.d("Data Matched", room.toString());
-                room.setRoom(bookingModel.getBookedRoom().trim() + " - Booked");
-                spinnerAdapter.notifyDataSetChanged();
-            }
+    public void submit(String date, String room, String username, Context context){
+        if(date.equals(null) || room.equals(null) || room.contains("Booked")){
+            Toast.makeText(context, "Please Input the data Correctly", Toast.LENGTH_SHORT).show();
+        }else{
+//            Intent intent = new Intent(context, confirmation.class);
+//            intent.putExtra("bookingRoom", room);
+//            intent.putExtra("dateRoom", date);
+//            intent.putExtra("username", username);
+//            context.startActivity(intent);
         }
     }
 
+    public void pushToDatabase(String room, String date, String username){
+        model.setTanggal(date);
+        model.setRoom(room);
+        model.setUsername(username);
+        dbRef.setValue(model);
+    }
 }

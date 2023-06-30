@@ -6,6 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.studio.Config.config;
+import com.example.studio.Model.BaseModel;
 import com.example.studio.Model.BassModel;
 import com.example.studio.Model.DrumModel;
 import com.example.studio.Model.GuitarModel;
@@ -15,9 +16,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ManufacturerController {
     private ManufacturerModel model;
     private DatabaseReference dbRef;
+    private List<ManufacturerModel> modelList = new ArrayList<>();
     private String DB_REF = "manufacturer";
 
     public ManufacturerController(){
@@ -32,10 +37,11 @@ public class ManufacturerController {
                     if(data.child("manufacturerId").getValue(String.class)
                             .equals(guitarModel.getManufacturerId())){
                         Log.d("manufacturerId", "found");
-                        setGuitarManufacturerModel(data);
-                        setGuitarText(guitarModel, guitarText);
+                        model = data.getValue(ManufacturerModel.class);
+                        modelList.add(model);
                     }
                 }
+                setGuitarText(guitarModel, guitarText);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -44,15 +50,13 @@ public class ManufacturerController {
         });
     }
 
-    public void setGuitarManufacturerModel(DataSnapshot data){
-        model = new ManufacturerModel();
-        model.setManufacturerName(data.child("manufacturerName").getValue(String.class));
-        model.setManufacturerId(data.child("manufacturerId").getValue(String.class));
-    }
-
     public void setGuitarText(GuitarModel guitarModel, TextView guitarText){
-        guitarText.setText("Guitar  : " + model.getManufacturerName()
-                            + " " + guitarModel.getGuitarName());
+        for(ManufacturerModel data:modelList){
+            if(data.getManufacturerId().equals(guitarModel.getManufacturerId())){
+                guitarText.setText("Guitar  : " + data.getManufacturerName()
+                                    + " " + guitarModel.getGuitarName());
+            }
+        }
     }
 
     //bass
@@ -65,10 +69,11 @@ public class ManufacturerController {
                     if(data.child("manufacturerId").getValue(String.class)
                             .equals(bassModel.getManufacturerId())){
                         Log.d("manufacturerId", "found");
-                        setBassManufacturerModel(data);
-                        setBassText(bassModel, bassText);
+                        model = data.getValue(ManufacturerModel.class);
+                        modelList.add(model);
                     }
                 }
+                setBassText(bassModel, bassText);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -77,15 +82,13 @@ public class ManufacturerController {
         });
     }
 
-    public void setBassManufacturerModel(DataSnapshot data){
-        model = new ManufacturerModel();
-        model.setManufacturerName(data.child("manufacturerName").getValue(String.class));
-        model.setManufacturerId(data.child("manufacturerId").getValue(String.class));
-    }
-
     public void setBassText(BassModel bassModel, TextView bassText){
-        bassText.setText("Bass    : " + model.getManufacturerName()
-                            + " " + bassModel.getBassName());
+        for(ManufacturerModel data: modelList){
+            if(data.getManufacturerId().equals(bassModel.getManufacturerId())){
+                bassText.setText("Bass    : " + model.getManufacturerName()
+                                    + " " + bassModel.getBassName());
+            }
+        }
     }
 
     //drum
@@ -98,10 +101,11 @@ public class ManufacturerController {
                     if(data.child("manufacturerId").getValue(String.class)
                             .equals(drumModel.getManufacturerId())){
                         Log.d("manufacturerId", "found");
-                        setDrumManufacturerModel(data);
-                        setDrumText(drumModel, drumText);
+                        model = data.getValue(ManufacturerModel.class);
+                        modelList.add(model);
                     }
                 }
+                setDrumText(drumModel, drumText);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -110,14 +114,12 @@ public class ManufacturerController {
         });
     }
 
-    public void setDrumManufacturerModel(DataSnapshot data){
-        model = new ManufacturerModel();
-        model.setManufacturerName(data.child("manufacturerName").getValue(String.class));
-        model.setManufacturerId(data.child("manufacturerId").getValue(String.class));
-    }
-
     public void setDrumText(DrumModel drumModel, TextView drumText){
-        drumText.setText("Drum   : " + model.getManufacturerName()
-                            + " " + drumModel.getDrumName());
-    }
+        for(ManufacturerModel data: modelList){
+            if(data.getManufacturerId().equals(drumModel.getManufacturerId())){
+                drumText.setText("Drum   : " + model.getManufacturerName()
+                                    + " " + drumModel.getDrumName());
+                }
+            }
+        }
 }

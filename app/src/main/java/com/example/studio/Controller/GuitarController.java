@@ -29,11 +29,11 @@ public class GuitarController {
                 for(DataSnapshot data : snapshot.getChildren()){
                     if(data.child("guitarId").getValue(String.class).equals(guitarId)){
                         Log.d("guitarId", "found");
-                        setModel(data);
-                        manufacturerController = new ManufacturerController();
-                        manufacturerController.getGuitarManufacturerData(model, guitarText);
+                        model = data.getValue(GuitarModel.class);
                     }
                 }
+                manufacturerController = new ManufacturerController();
+                manufacturerController.getGuitarManufacturerData(model, guitarText);
             }
 
             @Override
@@ -41,12 +41,5 @@ public class GuitarController {
                 Log.d("get data", "failed");
             }
         });
-    }
-
-    public void setModel(DataSnapshot data){
-        model = new GuitarModel();
-        model.setGuitarName(data.child("guitarName").getValue(String.class));
-        model.setGuitarId(data.child("guitarId").getValue(String.class));
-        model.setManufacturerId(data.child("manufacturerId").getValue(String.class));
     }
 }

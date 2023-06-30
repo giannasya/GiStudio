@@ -23,6 +23,7 @@ public class Ruang extends AppCompatActivity {
     private RoomController controller;
     private RoomModel model;
     private int index;
+    private String username;
     private TextView roomText, guitarText, bassText, drumText;
 
     @SuppressLint("MissingInflatedId")
@@ -31,7 +32,9 @@ public class Ruang extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ruang);
 
+        username = getIntent().getStringExtra("username");
         index = getIntent().getIntExtra("roomIndex", 0);
+        Log.d("username", username);
 
         model = new RoomModel();
 
@@ -78,6 +81,7 @@ public class Ruang extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Ruang.this, Booking.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });

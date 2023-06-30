@@ -49,6 +49,7 @@ public class Login extends AppCompatActivity implements AuthController.AuthCallb
     public void onLoginSuccess() {
         Toast.makeText(Login.this, R.string.LOGIN_SUCCESS, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Login.this, Home.class);
+        intent.putExtra("username", model.getUsername());
         startActivity(intent);
     }
 

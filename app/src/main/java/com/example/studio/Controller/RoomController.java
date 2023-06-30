@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.example.studio.Adapter.SpinnerAdapter;
 import com.example.studio.Config.config;
+import com.example.studio.Model.BookedModel;
 import com.example.studio.Model.BookingModel;
 import com.example.studio.Model.RoomModel;
 import com.example.studio.R;
@@ -47,6 +48,28 @@ public class RoomController extends BaseController{
         this.model = roomModel;
     }
 
+    public String getRoomPrice(String room, String price){
+        final String[] tempPrice = new String[1];
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot data:snapshot.getChildren()){
+                    if(data.child("room").getValue(String.class)
+                            .equals(room)){
+                        tempPrice[0] = data.child("price").getValue().toString();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println(error);
+            }
+        });
+        price = tempPrice[0];
+        return price;
+    }
+
     public void setSpinnerAdapter(ArrayList<RoomModel> roomList, ArrayAdapter<RoomModel> spinnerAdapter) {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -67,20 +90,15 @@ public class RoomController extends BaseController{
         });
     }
 
-    public void updateSelectedRoom(ArrayAdapter<RoomModel> spinnerAdapter, List<BookingModel> bookingModel) {
+    public void updateSelectedRoom(ArrayAdapter<RoomModel> spinnerAdapter, List<BookedModel> bookedModels) {
 
         for(int i=0; i<roomArray.length; i++){
             RoomModel room = spinnerAdapter.getItem(i);
             room.setRoom(roomArray[i]);
-            for(BookingModel bookingModel1: bookingModel){
-
-                Log.d("data sebelum if", room.getRoom());
-                Log.d("panjang data", String.valueOf(room.getRoom().trim().length()));
-                Log.d("booking model sebelum if", bookingModel1.getBookedRoom());
-                Log.d("panjang booking model", String.valueOf(room.getRoom().trim().length()));
-                if(bookingModel1.getBookedRoom().contains(roomArray[i])){
+            for(BookedModel bookedModel: bookedModels){
+                if(bookedModel.getBookedRoom().contains(roomArray[i])){
                     if(!room.getRoom().contains("Booked")){
-                        room.setRoom(bookingModel1.getBookedRoom());
+                        room.setRoom(bookedModel.getBookedRoom());
                         break;
                     }
                 }
@@ -133,12 +151,12 @@ public class RoomController extends BaseController{
                 for(DataSnapshot roomSnapshot : dataSnapshot.getChildren()){
                     String roomName = roomSnapshot.child("room").getValue(String.class);
                     if(roomName.equalsIgnoreCase(roomModel.getRoom().trim())){
-                        setRoomModel(roomSnapshot, roomModel);
-                        getGuitarDetails(roomModel, guitarText);
-                        getBassDetails(roomModel, bassText);
-                        getDrumDetails(roomModel, drumText);
+                        model = roomSnapshot.getValue(RoomModel.class);
                     }
                 }
+                getGuitarDetails(model, guitarText);
+                getBassDetails(model, bassText);
+                getDrumDetails(model, drumText);
             }
 
             @Override
@@ -146,13 +164,6 @@ public class RoomController extends BaseController{
                 System.out.println(R.string.DATA_NOT_FOUND);
             }
         });
-    }
-
-    private void setRoomModel(DataSnapshot data, RoomModel roomModel){
-        roomModel.setBassId(data.child("bassId").getValue().toString());
-        roomModel.setGuitarId(data.child("guitarId").getValue().toString());
-        roomModel.setDrumId(data.child("bassId").getValue().toString());
-        roomModel.setPrice(data.child("price").getValue().toString());
     }
 
     private void getGuitarDetails(RoomModel roomModel, TextView guitarText){

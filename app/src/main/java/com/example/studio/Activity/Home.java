@@ -2,6 +2,7 @@ package com.example.studio.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +13,15 @@ import com.example.studio.R;
 public class Home extends AppCompatActivity {
 
     private CardView card1, card2, card3, card4, card5, card6, card7, card8;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        username = getIntent().getStringExtra("username");
+        Log.d("username", username);
 
         card1 = findViewById(R.id.card1);
         card2 = findViewById(R.id.card2);
@@ -95,6 +100,7 @@ public class Home extends AppCompatActivity {
     private void navigateToRoomX(int x) {
         Intent intent = new Intent(Home.this, Ruang.class);
         intent.putExtra("roomIndex", x);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 }

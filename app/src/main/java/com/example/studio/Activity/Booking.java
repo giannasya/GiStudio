@@ -1,9 +1,11 @@
 package com.example.studio.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,12 +28,21 @@ public class Booking extends AppCompatActivity {
     private Spinner spinner;
     private Context context;
     private TextView datePicker;
+    private String username;
     private ArrayList<RoomModel> roomList;
+    private Button cancel, book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.booking);
+
+        username = getIntent().getStringExtra("username");
+        Log.d("username", username);
+
+        cancel = findViewById(R.id.cancel);
+        book = findViewById(R.id.book);
+
         roomController = new RoomController();
         bookingController = new BookingController();
         bookingModel = new BookingModel();
@@ -61,6 +72,13 @@ public class Booking extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 bookingController.setDate(context, datePicker, bookingModel, spinnerAdapter, roomList);
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bookingController.backHome(context, username);
             }
         });
     }

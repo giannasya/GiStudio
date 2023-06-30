@@ -1,20 +1,20 @@
 package com.example.studio.Model;
 
-public class BookingModel extends BaseModel{
+import java.io.Serializable;
+
+public class BookingModel implements Serializable {
 
     String room;
     String tanggal;
     String username;
-    String bookedRoom;
 
     public BookingModel(){
 
     }
-    public BookingModel(String room,String tanggal, String username, String bookedRoom){
+    public BookingModel(String room,String tanggal, String username){
         this.room = room;
         this.tanggal = tanggal;
         this.username = username;
-        this.bookedRoom = bookedRoom;
     }
 
     public String getRoom() {
@@ -39,13 +39,5 @@ public class BookingModel extends BaseModel{
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getBookedRoom(){
-        return bookedRoom;
-    }
-
-    public void setBookedRoom(String bookedRoom){
-        this.bookedRoom = bookedRoom;
     }
 }
