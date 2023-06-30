@@ -1,6 +1,8 @@
 package com.example.studio.Model;
 
-public class BookingModel extends BaseModel{
+import java.io.Serializable;
+
+public class BookingModel implements Serializable {
 
     String room;
     String tanggal;

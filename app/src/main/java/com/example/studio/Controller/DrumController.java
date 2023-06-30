@@ -29,11 +29,11 @@ public class DrumController {
                 for(DataSnapshot data : snapshot.getChildren()){
                     if(data.child("drumId").getValue(String.class).equals(drumId)){
                         Log.d("drumId", "found");
-                        setModel(data);
-                        manufacturerController = new ManufacturerController();
-                        manufacturerController.getDrumManufacturerData(model, drumText);
+                        model = data.getValue(DrumModel.class);
                     }
                 }
+                manufacturerController = new ManufacturerController();
+                manufacturerController.getDrumManufacturerData(model, drumText);
             }
 
             @Override
@@ -41,12 +41,5 @@ public class DrumController {
                 Log.d("get data", "failed");
             }
         });
-    }
-
-    public void setModel(DataSnapshot data){
-        model = new DrumModel();
-        model.setDrumName(data.child("drumName").getValue(String.class));
-        model.setDrumId(data.child("drumId").getValue(String.class));
-        model.setManufacturerId(data.child("manufacturerId").getValue(String.class));
     }
 }
