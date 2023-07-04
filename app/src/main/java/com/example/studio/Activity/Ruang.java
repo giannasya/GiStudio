@@ -3,6 +3,7 @@ package com.example.studio.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.studio.Controller.OnBackPressedController;
 import com.example.studio.Controller.RoomController;
 import com.example.studio.Controller.RoomImagesController;
 import com.example.studio.Model.RoomModel;
@@ -22,9 +24,11 @@ public class Ruang extends AppCompatActivity {
     private RoomImagesController imagesController;
     private RoomController controller;
     private RoomModel model;
+    private OnBackPressedController onBackPressedController;
     private int index;
+    private Context context;
     private String username;
-    private TextView roomText, guitarText, bassText, drumText;
+    private TextView roomText, guitarText, bassText, drumText, priceText;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -37,7 +41,9 @@ public class Ruang extends AppCompatActivity {
         Log.d("username", username);
 
         model = new RoomModel();
+        context = this;
 
+        onBackPressedController = new OnBackPressedController();
         imagesController = new RoomImagesController();
         controller = new RoomController(model);
 
@@ -50,20 +56,21 @@ public class Ruang extends AppCompatActivity {
         guitarText = findViewById(R.id.guitarText);
         bassText = findViewById(R.id.bassText);
         drumText = findViewById(R.id.drumText);
+        priceText = findViewById(R.id.priceText);
 
         controller.setRoomText(roomText, index, model);
-        imagesController.setImage(image);
-        controller.readRoomDetail(model, guitarText, bassText, drumText);
+        imagesController.setImage(context,image, index);
+        controller.readRoomDetail(model, guitarText, bassText, drumText, priceText);
+        Log.d("index", String.valueOf(index));
+
 
         previousBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                controller.readRoomDetail(model);
                 imagesController.previousImage();
-                imagesController.setImage(image);
+//                index = imagesController.setImage(context,image, index);
                 index = controller.previousRoom(roomText, index,
-                        model, guitarText, bassText, drumText);
-//                Log.d("model", model.getGuitarId());
+                        model, guitarText, bassText, drumText, priceText,context,image);
             }
         });
 
@@ -71,9 +78,9 @@ public class Ruang extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 imagesController.nextImage();
-                imagesController.setImage(image);
+//                index = imagesController.setImage(context,image, index);
                 index = controller.nextRoom(roomText, index, model,
-                        guitarText, bassText, drumText);
+                        guitarText, bassText, drumText, priceText,context, image);
             }
         });
 
@@ -85,5 +92,8 @@ public class Ruang extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    public void onBackPressed() {
+        onBackPressedController.toHome(context, username);
     }
 }

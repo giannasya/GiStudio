@@ -66,6 +66,12 @@
                             android:text="Tama Red"
                             android:id="@+id/drumText"
                             android:textColor="#555" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Price"
+                            android:id="@+id/priceText"
+                            android:textColor="#555" />
                     </LinearLayout>
 
                     <RelativeLayout

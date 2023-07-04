@@ -16,10 +16,13 @@
             android:name=".Activity.ItemHistory"
             android:exported="false" />
         <activity
+            android:name=".Activity.History"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Confirm"
             android:exported="false" />
         <activity
-            android:name=".Activity.register"
+            android:name=".Activity.Register"
             android:exported="false" />
         <activity
             android:name=".Activity.Ruang"

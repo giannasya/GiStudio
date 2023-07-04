@@ -10,7 +10,6 @@
     android:layout_height="match_parent"
     tools:context=".Activity.Home">
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/card1"
         android:layout_width="match_parent"
@@ -27,6 +26,7 @@
         app:cardUseCompatPadding="false">
 
         <ImageView
+            android:id="@+id/rooma"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="left|center"
@@ -61,6 +61,7 @@
         app:cardUseCompatPadding="false">
 
         <ImageView
+            android:id="@+id/roomb"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="left"
@@ -97,6 +98,7 @@
         app:cardUseCompatPadding="false">
 
         <ImageView
+            android:id="@+id/roomc"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="left"
@@ -131,6 +133,7 @@
         app:cardUseCompatPadding="false">
 
         <ImageView
+            android:id="@+id/roomd"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="left"
@@ -164,6 +167,7 @@
         app:cardUseCompatPadding="false">
 
         <ImageView
+            android:id="@+id/roome"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="left"
@@ -199,6 +203,7 @@
         app:cardUseCompatPadding="false">
 
         <ImageView
+            android:id="@+id/roomf"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="left"
@@ -234,6 +239,7 @@
         app:cardUseCompatPadding="false">
 
         <ImageView
+            android:id="@+id/roomg"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="left"
@@ -269,6 +275,7 @@
         app:cardUseCompatPadding="false">
 
         <ImageView
+            android:id="@+id/roomh"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="left"

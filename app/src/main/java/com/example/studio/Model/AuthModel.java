@@ -1,6 +1,8 @@
 package com.example.studio.Model;
 
-public class AuthModel  extends BaseModel{
+import java.io.Serializable;
+
+public class AuthModel  extends BaseModel implements Serializable {
     String email;
     String username;
     String password;
@@ -13,6 +15,8 @@ public class AuthModel  extends BaseModel{
         this.password = password;
         this.username = username;
     }
+
+
 
     public String getEmail() {
         return email;

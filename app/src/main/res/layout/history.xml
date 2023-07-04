@@ -7,8 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".Activity.History">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/itemHistory"
+    <TextView
+        android:id="@+id/history"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="History"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="65dp"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/history"
+        android:scrollbars="vertical"
+        tools:layout_editor_absoluteY="15dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,11 +30,11 @@ public class BassController {
                 for(DataSnapshot data : snapshot.getChildren()){
                     if(data.child("bassId").getValue(String.class).equals(bassId)){
                         Log.d("bassId", "found");
-                        setModel(data);
-                        manufacturerController = new ManufacturerController();
-                        manufacturerController.getBassManufacturerData(model, bassText);
+                        model = data.getValue(BassModel.class);
                     }
                 }
+                manufacturerController = new ManufacturerController();
+                manufacturerController.getBassManufacturerData(model, bassText);
             }
 
             @Override
@@ -42,12 +42,5 @@ public class BassController {
                 Log.d("get data", "failed");
             }
         });
-    }
-
-    public void setModel(DataSnapshot data){
-        model = new BassModel();
-        model.setBassName(data.child("bassName").getValue(String.class));
-        model.setBassId(data.child("bassId").getValue(String.class));
-        model.setManufacturerId(data.child("manufacturerId").getValue(String.class));
     }
 }

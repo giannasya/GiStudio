@@ -2,12 +2,18 @@ package com.example.studio.Controller;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.studio.Activity.History;
+import com.example.studio.Activity.Login;
+import com.example.studio.Activity.Register;
 import com.example.studio.Config.config;
 import com.example.studio.Model.AuthModel;
+import com.example.studio.Model.RoomModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -75,17 +81,20 @@ public class AuthController extends BaseController{
         });
     }
 
-    public void validate(Context context, String email, String username, String password, String repass){
+    public void toRegister(Context context){
+        Intent intent = new Intent(context, Register.class);
+        context.startActivity(intent);
+    }
+
+    public void getData(Context context, String email, String username, String password, String repass){
         List<AuthModel> authModelList = new ArrayList();
-        boolean emailGood;
-        boolean usernameGood;
-        boolean passGood;
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                AuthModel result = new AuthModel();
                 for(DataSnapshot data: snapshot.getChildren()){
-                    result = data.getValue(AuthModel.class);
+                    AuthModel result = data.getValue(AuthModel.class);
+                    result.setUsername(data.child("username").getValue().toString());
+                    result.setEmail(data.child("email").getValue().toString());
                     authModelList.add(result);
                 }
             }
@@ -95,40 +104,75 @@ public class AuthController extends BaseController{
                 System.out.println(error);
             }
         });
-        if(email==null || !email.contains("@") || username==null || repass==null || password==null){
-            Toast.makeText(context, "Please fill the data correctly", Toast.LENGTH_SHORT).show();
-        }
-
-        if(!authModelList.contains(email)){
-            emailGood = true;
-        }else{
-            Toast.makeText(context, "Email already exists", Toast.LENGTH_SHORT).show();
-            emailGood = false;
-        }
-
-        if(!authModelList.contains(username)){
-            usernameGood = true;
-        }else{
-            Toast.makeText(context, "Username already exists", Toast.LENGTH_SHORT).show();
-            usernameGood = false;
-        }
-
-        if(password==repass){
-            passGood = true;
-        }else{
-            Toast.makeText(context, "Password does not match", Toast.LENGTH_SHORT).show();
-            passGood = false;
-        }
-
-        if(emailGood && usernameGood && passGood){
-            pushAuth(email, username, password);
+        try{
+            validate(authModelList, email, username, password, repass, context);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public void pushAuth(String email, String username, String password){
+    public void validate(List<AuthModel> authModelList, String email, String username, String password, String repass,Context context){
+        boolean emailExists = false;
+        boolean usernameExists = false;
+        for(AuthModel data: authModelList){
+            Log.d("context", "masuk loop list");
+            if(data.getEmail().equals(email)){
+                emailExists = true;
+            Log.d("context", data.getEmail());
+            }
+            if(data.getUsername().equals(username)){
+                usernameExists = true;
+            Log.d("context", data.getUsername());
+            }
+        }
+        if(email.equals("") || !email.contains("@") || username.equals("") || repass.equals("") || password.equals("")){
+            Toast.makeText(context, "Please fill the data correctly", Toast.LENGTH_SHORT).show();
+        }
+
+        if(emailExists){
+            Toast.makeText(context, "Email already exists", Toast.LENGTH_SHORT).show();
+            Log.d("email exist", String.valueOf(!emailExists));
+        }
+
+        if(usernameExists){
+            Toast.makeText(context, "Username already exists", Toast.LENGTH_SHORT).show();
+        }
+
+        if(!password.equals(repass)){
+            Toast.makeText(context, "Password does not match", Toast.LENGTH_SHORT).show();
+        }
+
+        Log.d("email exist", String.valueOf(emailExists));
+        if(!emailExists && !usernameExists && password.equals(repass) && !email.equals("") && !username.equals("") && !repass.equals("")){
+            pushAuth(email, username, password, context);
+        }
+    }
+
+    public void pushAuth(String email, String username, String password, Context context){
+        Log.d("push Auth", email);
+        model = new AuthModel();
         model.setEmail(email);
         model.setUsername(username);
         model.setPassword(password);
-        dbRef.setValue(model);
+        if(!model.getUsername().equals("") && !model.getEmail().equals("") && !model.getPassword().equals("")){
+            String id = dbRef.push().getKey();
+            dbRef.child(id).setValue(model);
+            Intent intent = new Intent(context, Login.class);
+            Toast.makeText(context, "Register successful", Toast.LENGTH_SHORT).show();
+            context.startActivity(intent);
+            activity.finish();
+        }else{
+            Toast.makeText(context, "Please Input the data correctly", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void toLogin(Context context){
+        Intent intent = new Intent(context, Login.class);
+        context.startActivity(intent);
+    }
+    public void toHistory(Context context, String username){
+        Intent intent = new Intent(context, History.class);
+        intent.putExtra("username", username);
+        context.startActivity(intent);
     }
 }

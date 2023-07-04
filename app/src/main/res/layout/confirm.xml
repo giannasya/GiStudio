@@ -57,6 +57,7 @@
                         android:hint="your room">
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/room"
                             android:layout_height="match_parent"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,6 +78,7 @@
                         android:hint="date">
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/date"
                             android:layout_height="match_parent"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,6 +98,7 @@
                         android:hint="price">
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/price"
                             android:layout_height="match_parent"/>
                     </com.google.android.material.textfield.TextInputLayout>
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:gravity="center_vertical|center_horizontal"
-    tools:context=".Register">
+    tools:context=".Activity.Register">
 
     <TextView
         android:layout_width="match_parent"
@@ -25,8 +25,9 @@
         android:hint="Email">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
+            android:id="@+id/inputEmail"
             android:layout_height="match_parent"
-            android:background="#fff"
+            android:background="#fff"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -40,6 +41,7 @@
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
+            android:id="@+id/inputUser"
             android:layout_height="match_parent"
             android:background="#fff" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -56,6 +58,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/inputPass"
             android:background="#fff"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,6 +75,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/inputRepass"
             android:background="#fff"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -80,11 +84,18 @@
     <Button
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:id="@+id/loginbtn"
+        android:id="@+id/register"
         android:layout_marginTop="10dp"
-        android:text="Sign In"
+        android:text="Register"
         android:textColor="#fff"
-        android:onClick="loginHome"
+        android:backgroundTint="#032647"/>
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:id="@+id/backLogin"
+        android:layout_marginTop="10dp"
+        android:text="Back"
+        android:textColor="#fff"
         android:backgroundTint="#032647"/>
 </LinearLayout>
 

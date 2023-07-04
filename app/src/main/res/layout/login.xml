@@ -57,6 +57,25 @@
         android:textColor="#fff"
         android:onClick="loginHome"
         android:backgroundTint="#032647"/>
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="15dp"
+        android:textSize="12dp"
+        android:textAlignment="center"
+        android:layout_marginTop="5dp"
+        android:text="don't have accout?"
+        android:textColor="@color/black"
+        android:backgroundTint="#032647"/>
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="15dp"
+        android:id="@+id/register"
+        android:textSize="12dp"
+        android:textAlignment="center"
+        android:layout_marginTop="2dp"
+        android:text="register here"
+        android:textColor="@color/black"
+        android:backgroundTint="#032647"/>
 </LinearLayout>
 
 

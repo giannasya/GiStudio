@@ -27,7 +27,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/roomb" />
+                    android:src="@drawable/roomb"
+                    android:id="@+id/bookingImage"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -40,6 +41,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:text="Tanggal Peminjaman"
+                        android:id="@+id/tanggalPeminjaman"
                         android:textColor="#000"
                         android:textSize="18sp" />
 

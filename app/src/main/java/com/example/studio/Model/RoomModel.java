@@ -7,16 +7,18 @@ public class RoomModel extends BaseModel{
     private String guitarId;
     private String drumId;
     private String price;
+    private String imageUrl;
 
     public RoomModel(){
     }
 
-    public RoomModel(String room, String bassId, String guitarId, String drumId, String price){
+    public RoomModel(String room, String bassId, String guitarId, String drumId, String price, String imageUrl){
         this.room = room;
         this.bassId = bassId;
         this.guitarId = guitarId;
         this.drumId = drumId;
         this.price = price;
+        this.imageUrl = imageUrl;
     };
 
     public String toString(){
@@ -60,5 +62,13 @@ public class RoomModel extends BaseModel{
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
