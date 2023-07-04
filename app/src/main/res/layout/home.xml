@@ -1,59 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:scrollbars="none">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-<<<<<<< HEAD
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        tools:context=".Activity.Home">
+        tools:context=".Activity.Home"
+        android:background="#DEB887">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card1"
             android:layout_width="match_parent"
-=======
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activity.Home"
-    android:background="#DEB887">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="20dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
-        app:cardMaxElevation="12dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="false">
-
-        <ImageView
-            android:id="@+id/rooma"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="left|center"
-            android:layout_margin="10dp"
-            android:src="@drawable/rooma"/>
-
-        <TextView
-            android:layout_width="wrap_content"
->>>>>>> 8fe6d8f7bae889272bfffbf93bfaca78e2be5685
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
+            android:layout_marginTop="20dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp"
@@ -67,7 +32,7 @@
                 android:layout_height="200dp"
                 android:layout_gravity="left|center"
                 android:layout_margin="10dp"
-                android:src="@drawable/rooma" />
+                android:src="@drawable/rooma"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,17 +67,18 @@
                 android:layout_height="200dp"
                 android:layout_gravity="left"
                 android:layout_margin="10dp"
-                android:src="@drawable/roomb" />
+                android:src="@drawable/roomb"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginRight="45dp"
                 android:text="Room B"
-                android:textSize="25dp" />
+                android:textSize="25dp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -122,8 +88,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/card2"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
@@ -138,15 +104,15 @@
                 android:layout_height="200dp"
                 android:layout_gravity="left"
                 android:layout_margin="10dp"
-                android:src="@drawable/roomc" />
+                android:src="@drawable/roomc"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginRight="45dp"
                 android:text="Room C"
                 android:textSize="25dp" />
         </androidx.cardview.widget.CardView>
@@ -157,8 +123,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/card3"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
@@ -167,39 +133,21 @@
             app:cardPreventCornerOverlap="false"
             app:cardUseCompatPadding="false">
 
-<<<<<<< HEAD
             <ImageView
                 android:id="@+id/roomd"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="left"
                 android:layout_margin="10dp"
-                android:src="@drawable/roomd" />
-=======
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/card4"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
-        app:cardMaxElevation="12dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="false">
->>>>>>> 8fe6d8f7bae889272bfffbf93bfaca78e2be5685
+                android:src="@drawable/roomd"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginRight="45dp"
                 android:text="Room D"
                 android:textSize="25dp" />
         </androidx.cardview.widget.CardView>
@@ -211,6 +159,7 @@
             android:layout_below="@+id/card4"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
@@ -225,35 +174,18 @@
                 android:layout_height="200dp"
                 android:layout_gravity="left"
                 android:layout_margin="10dp"
-                android:src="@drawable/roome" />
+                android:src="@drawable/roome"
+                />
 
-<<<<<<< HEAD
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginRight="45dp"
                 android:text="Room E"
-                android:textSize="25dp" />
-=======
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/card5"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
-        app:cardMaxElevation="12dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="false">
->>>>>>> 8fe6d8f7bae889272bfffbf93bfaca78e2be5685
+                android:textSize="25dp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -264,6 +196,7 @@
             android:layout_below="@+id/card5"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
@@ -278,35 +211,18 @@
                 android:layout_height="200dp"
                 android:layout_gravity="left"
                 android:layout_margin="10dp"
-                android:src="@drawable/roomf" />
+                android:src="@drawable/roomf"
+                />
 
-<<<<<<< HEAD
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginRight="45dp"
                 android:text="Room F"
-                android:textSize="25dp" />
-=======
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/card6"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
-        app:cardMaxElevation="12dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="false">
->>>>>>> 8fe6d8f7bae889272bfffbf93bfaca78e2be5685
+                android:textSize="25dp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -317,6 +233,7 @@
             android:layout_below="@+id/card6"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
@@ -331,35 +248,18 @@
                 android:layout_height="200dp"
                 android:layout_gravity="left"
                 android:layout_margin="10dp"
-                android:src="@drawable/roomg" />
+                android:src="@drawable/roomg"
+                />
 
-<<<<<<< HEAD
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginRight="45dp"
                 android:text="Room G"
-                android:textSize="25dp" />
-=======
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/card7"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
-        app:cardMaxElevation="12dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="false">
->>>>>>> 8fe6d8f7bae889272bfffbf93bfaca78e2be5685
+                android:textSize="25dp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -370,7 +270,8 @@
             android:layout_below="@+id/card7"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp"
@@ -384,17 +285,18 @@
                 android:layout_height="200dp"
                 android:layout_gravity="left"
                 android:layout_margin="10dp"
-                android:src="@drawable/roomh" />
+                android:src="@drawable/roomh"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginRight="45dp"
                 android:text="Room H"
-                android:textSize="25dp" />
+                android:textSize="25dp"/>
 
         </androidx.cardview.widget.CardView>
 
