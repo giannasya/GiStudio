@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:scrollbars="none">
 
+<<<<<<< HEAD
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,6 +16,39 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card1"
             android:layout_width="match_parent"
+=======
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Home"
+    android:background="#DEB887">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false">
+
+        <ImageView
+            android:id="@+id/rooma"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="left|center"
+            android:layout_margin="10dp"
+            android:src="@drawable/rooma"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+>>>>>>> 8fe6d8f7bae889272bfffbf93bfaca78e2be5685
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
@@ -133,6 +167,7 @@
             app:cardPreventCornerOverlap="false"
             app:cardUseCompatPadding="false">
 
+<<<<<<< HEAD
             <ImageView
                 android:id="@+id/roomd"
                 android:layout_width="200dp"
@@ -140,6 +175,23 @@
                 android:layout_gravity="left"
                 android:layout_margin="10dp"
                 android:src="@drawable/roomd" />
+=======
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card4"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false">
+>>>>>>> 8fe6d8f7bae889272bfffbf93bfaca78e2be5685
 
             <TextView
                 android:layout_width="wrap_content"
@@ -175,6 +227,7 @@
                 android:layout_margin="10dp"
                 android:src="@drawable/roome" />
 
+<<<<<<< HEAD
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -184,6 +237,23 @@
                 android:layout_marginBottom="20dp"
                 android:text="Room E"
                 android:textSize="25dp" />
+=======
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card5"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false">
+>>>>>>> 8fe6d8f7bae889272bfffbf93bfaca78e2be5685
 
         </androidx.cardview.widget.CardView>
 
@@ -210,6 +280,7 @@
                 android:layout_margin="10dp"
                 android:src="@drawable/roomf" />
 
+<<<<<<< HEAD
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -219,6 +290,23 @@
                 android:layout_marginBottom="20dp"
                 android:text="Room F"
                 android:textSize="25dp" />
+=======
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card6"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false">
+>>>>>>> 8fe6d8f7bae889272bfffbf93bfaca78e2be5685
 
         </androidx.cardview.widget.CardView>
 
@@ -245,6 +333,7 @@
                 android:layout_margin="10dp"
                 android:src="@drawable/roomg" />
 
+<<<<<<< HEAD
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -254,6 +343,23 @@
                 android:layout_marginBottom="20dp"
                 android:text="Room G"
                 android:textSize="25dp" />
+=======
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card7"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false">
+>>>>>>> 8fe6d8f7bae889272bfffbf93bfaca78e2be5685
 
         </androidx.cardview.widget.CardView>
 
