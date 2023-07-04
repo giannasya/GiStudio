@@ -1,6 +1,7 @@
 package com.example.studio.Controller;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -9,15 +10,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.studio.Activity.History;
+import com.example.studio.Activity.Home;
 import com.example.studio.Activity.Login;
 import com.example.studio.Activity.Register;
 import com.example.studio.Config.config;
 import com.example.studio.Model.AuthModel;
 import com.example.studio.Model.RoomModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +40,9 @@ public class AuthController extends BaseController{
     private static String passDB = "password";
     private ArrayList<AuthModel> authList;
     private AuthCallback authCallback;
+    private FirebaseAuth auth;
+    private FirebaseUser authUser;
+    ProgressDialog progressDialog;
 
     public AuthController(){
         dbRef = config.connection(DB_REF);
@@ -54,31 +65,34 @@ public class AuthController extends BaseController{
         this.authCallback = authCallback;
     }
 
-    public void loginWithEmail(AuthModel model){
-        config.connection(DB_REF).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean loginSuccessful = false;
-                for (DataSnapshot authSnapshot : dataSnapshot.getChildren()) {
-                    String username = authSnapshot.child(unameDB).getValue(String.class);
-                    String password = authSnapshot.child(passDB).getValue(String.class);
-                    if (username != null && username.equals(model.getUsername())
-                            && password != null && password.equals(model.getPassword())) {
-                        loginSuccessful = true;
-                        authCallback.onLoginSuccess();
-                        break;
+    public void Login(Context context,String username, String password){
+        if(username != null && password != null){
+            Log.d("masuk", username);
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<AuthModel> dataAuth = new ArrayList<>();
+                    for(DataSnapshot data: snapshot.getChildren()){
+                        AuthModel result = data.getValue(AuthModel.class);
+                        result.setPassword(data.child("username").getValue(String.class));
+                        dataAuth.add(result);
+                        Log.d("data", result.getUsername());
+                    }
+                    for(int i=0;i<dataAuth.size();i++){
+                        Intent intent = new Intent(context, Home.class);
+                        Log.d("bener", "berhasil");
+                        intent.putExtra("username", username);
+                        context.startActivity(intent);
+                        ((Activity)context).finish();
                     }
                 }
-                if (!loginSuccessful) {
-                    authCallback.onLoginFailure();
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("gagal");
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    System.out.println(error);
+                }
+            });
+        }
     }
 
     public void toRegister(Context context){
@@ -97,6 +111,12 @@ public class AuthController extends BaseController{
                     result.setEmail(data.child("email").getValue().toString());
                     authModelList.add(result);
                 }
+                try{
+                    Log.d("resgitered email", String.valueOf(authModelList.size()));
+                    validate(authModelList, email, username, password, repass, context);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -104,11 +124,6 @@ public class AuthController extends BaseController{
                 System.out.println(error);
             }
         });
-        try{
-            validate(authModelList, email, username, password, repass, context);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void validate(List<AuthModel> authModelList, String email, String username, String password, String repass,Context context){
@@ -174,5 +189,50 @@ public class AuthController extends BaseController{
         Intent intent = new Intent(context, History.class);
         intent.putExtra("username", username);
         context.startActivity(intent);
+    }
+
+    public void registerAuth(Context context, String email, String password){
+        if(email!=null && password!=null){
+            auth = FirebaseAuth.getInstance();
+            authUser = auth.getCurrentUser();
+
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(context, "Register Complete", Toast.LENGTH_SHORT).show();
+                        toLogin(context);
+                    }else{
+                        Toast.makeText(context, "Something Wrong", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+    public void loginAuth(Context context, String email, String password){
+        if(email != null && password != null){
+            auth = FirebaseAuth.getInstance();
+            authUser = auth.getCurrentUser();
+
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show();
+                        toHome(context, email);
+                    }else {
+                        Toast.makeText(context, "Login Failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+    public void toHome(Context context, String email){
+        Intent intent = new Intent(context, Home.class);
+        intent.putExtra("username", email);
+        context.startActivity(intent);
+        ((Activity)context).finish();
     }
 }

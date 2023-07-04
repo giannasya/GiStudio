@@ -48,13 +48,14 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = iEmail.getText().toString().trim();
-                String username = iUser.getText().toString().trim();
+//                String username = iUser.getText().toString().trim();
                 String pass = iPass.getText().toString().trim();
-                String repass = iRepass.getText().toString().trim();
-                Log.d("pass", pass);
-                Log.d("repass", repass);
-
-                controller.getData(context, email, username, pass, repass);
+//                String repass = iRepass.getText().toString().trim();
+//                Log.d("pass", pass);
+//                Log.d("repass", repass);
+//
+//                controller.getData(context, email, username, pass, repass);
+                controller.registerAuth(context, email, pass);
             }
         });
 

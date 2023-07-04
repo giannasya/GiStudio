@@ -40,6 +40,15 @@ public class Login extends AppCompatActivity implements AuthController.AuthCallb
         model = new AuthModel();
         controller = new AuthController((AuthController.AuthCallback) this);
 
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = userText.getText().toString().trim();
+                String password = passText.getText().toString().trim();
+                controller.loginAuth(context, username, password);
+            }
+        });
+
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,17 +61,19 @@ public class Login extends AppCompatActivity implements AuthController.AuthCallb
 
     }
 
-    public void loginHome(View view){
-        uname = userText.getText().toString().trim();
-        pass = passText.getText().toString().trim();
-
-        Log.d("email = ", uname);
-
-        model.setUsername(uname);
-        model.setPassword(pass);
-
-        controller.loginWithEmail(model);
-    }
+//    public void loginHome(View view){
+//        uname = userText.getText().toString().trim();
+//        pass = passText.getText().toString().trim();
+//
+//        Log.d("email = ", uname);
+//
+//        model.setUsername(uname);
+//        model.setPassword(pass);
+//
+//        Log.d("model", model.getUsername());
+//
+//        controller.loginWithEmail(model);
+//    }
 
     @Override
     public void onLoginSuccess() {

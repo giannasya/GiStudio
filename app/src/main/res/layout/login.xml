@@ -55,7 +55,6 @@
         android:layout_marginTop="10dp"
         android:text="login"
         android:textColor="#fff"
-        android:onClick="loginHome"
         android:backgroundTint="#032647"/>
     <TextView
         android:layout_width="150dp"
