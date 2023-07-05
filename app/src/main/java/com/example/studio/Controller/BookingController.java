@@ -172,6 +172,7 @@ public class BookingController {
         model.setTanggal(date);
         model.setRoom(room);
         model.setUsername(username);
+        EmailSender.sendPasswordEmail(model.getUsername(), model);
         dbRef.child(id).setValue(model);
         Intent intent = new Intent(context, Home.class);
         Toast.makeText(context, "Room Booked", Toast.LENGTH_SHORT).show();

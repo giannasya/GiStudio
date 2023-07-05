@@ -23,13 +23,14 @@ public class Login extends AppCompatActivity implements AuthController.AuthCallb
     private EditText userText, passText;
     private String uname, pass;
     private Context context;
-    private TextView registerBtn;
+    private TextView registerBtn, forget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+        forget = findViewById(R.id.forgot);
         registerBtn = findViewById(R.id.register);
         loginBtn = findViewById(R.id.loginbtn);
         userText = findViewById(R.id.usernametxt);
@@ -58,6 +59,14 @@ public class Login extends AppCompatActivity implements AuthController.AuthCallb
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = "praba.elmahdi@gmail.com";
+                controller.sendEmail(email);
+            }
+        });
 
     }
 

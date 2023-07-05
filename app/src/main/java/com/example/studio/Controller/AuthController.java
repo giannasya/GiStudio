@@ -42,7 +42,7 @@ public class AuthController extends BaseController{
     private AuthCallback authCallback;
     private FirebaseAuth auth;
     private FirebaseUser authUser;
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     public AuthController(){
         dbRef = config.connection(DB_REF);
@@ -234,5 +234,19 @@ public class AuthController extends BaseController{
         intent.putExtra("username", email);
         context.startActivity(intent);
         ((Activity)context).finish();
+    }
+
+    public void sendEmail(String email){
+        auth = FirebaseAuth.getInstance();
+        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Log.d("task", "success");
+                }else{
+                    Log.d("task", "failed");
+                }
+            }
+        });
     }
 }
