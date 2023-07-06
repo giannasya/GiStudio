@@ -108,7 +108,11 @@ public class Booking extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String date = datePicker.getText().toString().trim();
-                bookingController.submit(date, bookingModel.getRoom(), username, context);
+                if(myDate!=null){
+                    bookingController.submit(date, bookingModel.getRoom(), username, context, myDate, room);
+                }else{
+                    bookingController.submit(date, bookingModel.getRoom(), username, context);
+                }
             }
         });
     }

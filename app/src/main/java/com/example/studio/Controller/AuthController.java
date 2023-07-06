@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.studio.Activity.ForgotPassword;
 import com.example.studio.Activity.History;
 import com.example.studio.Activity.Home;
 import com.example.studio.Activity.Login;
@@ -63,6 +66,11 @@ public class AuthController extends BaseController{
     public AuthController(AuthCallback authCallback){
         dbRef = config.connection(DB_REF);
         this.authCallback = authCallback;
+    }
+
+    public void toReset(Context context){
+        Intent intent = new Intent(context, ForgotPassword.class);
+        context.startActivity(intent);
     }
 
     public void Login(Context context,String username, String password){
@@ -191,8 +199,12 @@ public class AuthController extends BaseController{
         context.startActivity(intent);
     }
 
-    public void registerAuth(Context context, String email, String password){
-        if(email!=null && password!=null){
+    public void registerAuth(Context context, String email, String password, String repass){
+        if (TextUtils.isEmpty(email) && !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(context, "Please fill your email correctly", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!email.isEmpty() && !password.isEmpty() && password.equals(repass)){
             auth = FirebaseAuth.getInstance();
             authUser = auth.getCurrentUser();
 
@@ -203,15 +215,21 @@ public class AuthController extends BaseController{
                         Toast.makeText(context, "Register Complete", Toast.LENGTH_SHORT).show();
                         toLogin(context);
                     }else{
-                        Toast.makeText(context, "Something Wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();;
                     }
                 }
             });
+        }else{
+            Toast.makeText(context, "Please fill the data correctly", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void loginAuth(Context context, String email, String password){
-        if(email != null && password != null){
+        if (TextUtils.isEmpty(email) && !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(context, "Please fill your email correctly", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!email.isEmpty() && !password.isEmpty()){
             auth = FirebaseAuth.getInstance();
             authUser = auth.getCurrentUser();
 
@@ -222,10 +240,12 @@ public class AuthController extends BaseController{
                         Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show();
                         toHome(context, email);
                     }else {
-                        Toast.makeText(context, "Login Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
+        }else{
+            Toast.makeText(context, "Please fill the data correctly", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -236,17 +256,26 @@ public class AuthController extends BaseController{
         ((Activity)context).finish();
     }
 
-    public void sendEmail(String email){
-        auth = FirebaseAuth.getInstance();
-        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Log.d("task", "success");
-                }else{
-                    Log.d("task", "failed");
+    public void sendEmail(Context context,String email){
+        if (TextUtils.isEmpty(email) && !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(context, "Please fill your email correctly", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!email.isEmpty()){
+            auth = FirebaseAuth.getInstance();
+            auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(context, "Link sent to your email", Toast.LENGTH_SHORT).show();
+                        toLogin(context);
+                    }else{
+                        Toast.makeText(context, "Something Wrong", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            Toast.makeText(context, "Email cannot be empty", Toast.LENGTH_SHORT).show();
+        }
     }
 }

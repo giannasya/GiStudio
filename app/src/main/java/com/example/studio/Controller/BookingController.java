@@ -166,6 +166,22 @@ public class BookingController {
         }
     }
 
+    public void submit(String date, String room, String username, Context context, String myDate, String myRoom){
+        if(date == null || room == null || room.contains("Booked")){
+            Toast.makeText(context, "Please Input the data Correctly", Toast.LENGTH_SHORT).show();
+        }else{
+            model = new BookingModel();
+            model.setRoom(room);
+            model.setTanggal(date);
+            model.setUsername(username);
+            Intent intent = new Intent(context, Confirm.class);
+            intent.putExtra("bookingModel", model);
+            intent.putExtra("myDate", myDate);
+            intent.putExtra("myRoom", myRoom);
+            context.startActivity(intent);
+        }
+    }
+
     public void pushToDatabase(String room, String date, String username, Context context){
         model = new BookingModel();
         String id = dbRef.push().getKey();
@@ -179,6 +195,37 @@ public class BookingController {
         intent.putExtra("username", username);
         context.startActivity(intent);
         ((Activity) context).finish();
+    }
+
+    public void update(String room, String date, String username, Context context, String myDate, String myRoom){
+        dbRef.orderByChild("username").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot data: snapshot.getChildren()){
+                    Log.d("room", data.child("room").getValue(String.class));
+                    Log.d("date", data.child("tanggal").getValue(String.class));
+                    if(data.child("room").getValue(String.class).equals(myRoom) && data.child("tanggal").getValue(String.class).equals(myDate)){
+                        model = new BookingModel();
+                        String id = data.getKey();
+                        model.setTanggal(date);
+                        model.setRoom(room);
+                        model.setUsername(username);
+                        dbRef.child(id).setValue(model);
+                        break;
+                    }
+                }
+                Intent intent = new Intent(context, History.class);
+                Toast.makeText(context, "Room Rescheduled", Toast.LENGTH_SHORT).show();
+                intent.putExtra("username", username);
+                context.startActivity(intent);
+                ((Activity) context).finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void setCardAdapter(String username, List<BookedModel> bookedModelList, CardAdapter cardAdapter){

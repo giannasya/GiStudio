@@ -21,6 +21,7 @@ public class Confirm extends AppCompatActivity {
     private EditText roomText, dateText, priceText;
     private Button cancel, book;
     private Context context;
+    private String myDate, myRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,9 @@ public class Confirm extends AppCompatActivity {
         roomText = findViewById(R.id.room);
         dateText = findViewById(R.id.date);
         priceText = findViewById(R.id.price);
+
+        myDate = getIntent().getStringExtra("myDate");
+        myRoom = getIntent().getStringExtra("myRoom");
 
         roomController.getRoomPrice(model.getRoom(), priceText);
         roomText.setText(model.getRoom());
@@ -58,7 +62,11 @@ public class Confirm extends AppCompatActivity {
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.pushToDatabase(model.getRoom(), model.getTanggal(), model.getUsername(), context);
+                if(myDate!=null){
+                    controller.update(model.getRoom(), model.getTanggal(), model.getUsername(), context, myDate, myRoom);
+                }else{
+                    controller.pushToDatabase(model.getRoom(), model.getTanggal(), model.getUsername(), context);
+                }
             }
         });
     }

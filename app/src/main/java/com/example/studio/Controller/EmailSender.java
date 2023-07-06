@@ -48,8 +48,9 @@ public class EmailSender {
             final Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(EMAIL_USERNAME));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
-            message.setSubject("Testing");
-            message.setText("Username: " + bookingModel.getUsername() + "\nBookingDate: " + bookingModel.getTanggal()
+            message.setSubject("Booking Details");
+            message.setText("Thank you for trusting us and booked our studio, heres your receipt : "
+                    + "\nUsername: " + bookingModel.getUsername() + "\nBookingDate: " + bookingModel.getTanggal()
                     + "\nBooked Room: " + bookingModel.getRoom());
 
             // Send the message on a separate thread using AsyncTask

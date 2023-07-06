@@ -28,7 +28,6 @@ public class Register extends AppCompatActivity {
         controller = new AuthController();
 
         iEmail = findViewById(R.id.inputEmail);
-        iUser = findViewById(R.id.inputUser);
         iPass = findViewById(R.id.inputPass);
         iRepass = findViewById(R.id.inputRepass);
 
@@ -50,12 +49,13 @@ public class Register extends AppCompatActivity {
                 String email = iEmail.getText().toString().trim();
 //                String username = iUser.getText().toString().trim();
                 String pass = iPass.getText().toString().trim();
+                String repass = iRepass.getText().toString().trim();
 //                String repass = iRepass.getText().toString().trim();
 //                Log.d("pass", pass);
 //                Log.d("repass", repass);
 //
 //                controller.getData(context, email, username, pass, repass);
-                controller.registerAuth(context, email, pass);
+                controller.registerAuth(context, email, pass, repass);
             }
         });
 

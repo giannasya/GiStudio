@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -63,8 +64,7 @@ public class Login extends AppCompatActivity implements AuthController.AuthCallb
         forget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = "praba.elmahdi@gmail.com";
-                controller.sendEmail(email);
+                controller.toReset(context);
             }
         });
 
@@ -95,6 +95,25 @@ public class Login extends AppCompatActivity implements AuthController.AuthCallb
     @Override
     public void onLoginFailure() {
         Toast.makeText(Login.this,R.string.LOGIN_FAILED, Toast.LENGTH_SHORT).show();
+    }
+
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this,"Tekan sekali lagi untuk keluar",Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = true;
+            }
+        },3000);
     }
 
 }

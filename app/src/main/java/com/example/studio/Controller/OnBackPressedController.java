@@ -7,12 +7,18 @@ import android.content.Intent;
 import com.example.studio.Activity.Booking;
 import com.example.studio.Activity.History;
 import com.example.studio.Activity.Home;
+import com.example.studio.Activity.Login;
 import com.example.studio.Activity.Ruang;
 
 public class OnBackPressedController {
     public void toHome(Context context, String username){
         Intent intent = new Intent(context, Home.class);
         intent.putExtra("username", username);
+        context.startActivity(intent);
+    }
+
+    public void toLogin(Context context){
+        Intent intent = new Intent(context, Login.class);
         context.startActivity(intent);
     }
 
